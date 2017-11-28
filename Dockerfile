@@ -15,16 +15,12 @@
 #     with this program; if not, write to the Free Software Foundation, Inc.,
 #     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-FROM ubuntu:trusty
-MAINTAINER Bren Briggs <briggs.brenton@gmail.com>
-RUN apt-get update && apt-get install -y openjdk-7-jdk wget git
-RUN mkdir /minecraft-workspace /minecraft /data
-RUN wget -O /minecraft-workspace/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+FROM ubuntu:artful
+MAINTAINER Paolo Poso <paolo@paoloposo.de>
+RUN apt-get update && apt-get install -y openjdk-8-jre-headless wget
+RUN mkdir /minecraft /data; cd /minecraft
+RUN wget -O craftbukkit.jar https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.12.2.jar
 
-# Capture only stderr to reduce log verbosity. 
-RUN cd /minecraft-workspace/ && java -jar BuildTools.jar --rev latest 2>&1 >/dev/null
-RUN mv /minecraft-workspace/craftbukkit-*.jar /minecraft
-RUN rm -rf /minecraft-workspace
 EXPOSE 25565
 WORKDIR /data
 ADD start-minecraft.sh /root/start-minecraft.sh
