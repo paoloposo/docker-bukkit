@@ -19,7 +19,7 @@ FROM ubuntu:artful
 MAINTAINER Paolo Poso <paolo@paoloposo.de>
 RUN apt-get update && apt-get install -y openjdk-8-jre-headless wget
 RUN mkdir /minecraft /data; cd /minecraft
-RUN wget -O /minecraft/craftbukkit.jar https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.12.2.jar
+RUN wget -O /minecraft/craftbukkit.jar https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.12.jar
 
 EXPOSE 25565
 WORKDIR /data
